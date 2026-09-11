@@ -26,4 +26,7 @@ public class ChatService {
     public List<ChatMessage> getChatHistory() {
         return chatMessageRepository.findAll();
     }
+    public ChatMessage getChatById(Long id) {
+        return chatMessageRepository.findById(id).orElseThrow();
+    }
 }

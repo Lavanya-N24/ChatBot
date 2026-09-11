@@ -25,4 +25,9 @@ public class ChatController {
     public List<ChatMessage> getChatHistory() {
         return chatService.getChatHistory();
     }
+    @GetMapping("/chat/{id}")
+    public ChatMessage getChatById(@PathVariable Long id) {
+        return chatService.getChatById(id);
+    }
 }
+

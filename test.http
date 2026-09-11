@@ -6,3 +6,6 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:8080/chat/history
+###
+
+GET http://localhost:8080/chat/2
