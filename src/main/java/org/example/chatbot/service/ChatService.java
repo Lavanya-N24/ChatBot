@@ -3,7 +3,7 @@ package org.example.chatbot.service;
 import org.example.chatbot.entity.ChatMessage;
 import org.example.chatbot.repository.ChatMessageRepository;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 @Service
 public class ChatService {
 
@@ -22,5 +22,8 @@ public class ChatService {
         chatMessageRepository.save(chatMessage);
 
         return response;
+    }
+    public List<ChatMessage> getChatHistory() {
+        return chatMessageRepository.findAll();
     }
 }
