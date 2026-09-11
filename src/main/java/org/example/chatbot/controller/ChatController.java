@@ -1,5 +1,6 @@
 package org.example.chatbot.controller;
-
+import org.example.chatbot.entity.ChatMessage;
+import java.util.List;
 import org.example.chatbot.service.ChatService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,5 +21,8 @@ public class ChatController {
         String response= chatService.generateResponse(request.getMessage());
         return new ChatResponse(response);
     }
-
+    @GetMapping("/chat/history")
+    public List<ChatMessage> getChatHistory() {
+        return chatService.getChatHistory();
+    }
 }
