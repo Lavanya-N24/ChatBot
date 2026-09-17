@@ -29,5 +29,13 @@ public class ChatController {
     public ChatMessage getChatById(@PathVariable Long id) {
         return chatService.getChatById(id);
     }
+    @PutMapping("/chat/{id}")
+    public ChatMessage updateChat(
+            @PathVariable Long id,
+            @RequestBody UpdateChatRequest request) {
+
+        return chatService.updateChat(id, request.getMessage());
+    }
+
 }
 

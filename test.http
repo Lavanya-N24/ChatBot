@@ -9,3 +9,11 @@ GET http://localhost:8080/chat/history
 ###
 
 GET http://localhost:8080/chat/2
+###
+
+PUT http://localhost:8080/chat/2
+Content-Type: application/json
+
+{
+  "message": "How are you?"
+}

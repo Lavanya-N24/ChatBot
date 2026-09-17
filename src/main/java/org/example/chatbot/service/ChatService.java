@@ -29,4 +29,16 @@ public class ChatService {
     public ChatMessage getChatById(Long id) {
         return chatMessageRepository.findById(id).orElseThrow();
     }
+    public ChatMessage updateChat(Long id, String message) {
+
+        ChatMessage chatMessage = chatMessageRepository.findById(id)
+                .orElseThrow();
+
+        String response = "You said: " + message;
+
+        chatMessage.setMessage(message);
+        chatMessage.setResponse(response);
+
+        return chatMessageRepository.save(chatMessage);
+    }
 }
