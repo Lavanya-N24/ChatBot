@@ -8,16 +8,25 @@ Content-Type: application/json
 GET http://localhost:8080/chat/history
 ###
 
-GET http://localhost:8080/chat/999
+GET http://localhost:8080/chat/4
 ###
+
 
 PUT http://localhost:8080/chat/2
 Content-Type: application/json
 
 {
   "message": "How are you?"
+
+Content-Type: application/json
+
+  {
+    "message": "Testing"
+  }
 }
 ###
 
 DELETE http://localhost:8080/chat/4
+
+
 
