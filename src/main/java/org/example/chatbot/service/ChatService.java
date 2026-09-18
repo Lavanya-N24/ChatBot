@@ -2,8 +2,12 @@ package org.example.chatbot.service;
 
 import org.example.chatbot.entity.ChatMessage;
 import org.example.chatbot.repository.ChatMessageRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
+
 @Service
 public class ChatService {
 
@@ -23,12 +27,21 @@ public class ChatService {
 
         return response;
     }
+
     public List<ChatMessage> getChatHistory() {
         return chatMessageRepository.findAll();
     }
+
     public ChatMessage getChatById(Long id) {
-        return chatMessageRepository.findById(id).orElseThrow();
+        return chatMessageRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Chat with ID " + id + " not found"
+                        )
+                );
     }
+
     public ChatMessage updateChat(Long id, String message) {
 
         ChatMessage chatMessage = chatMessageRepository.findById(id)
@@ -41,6 +54,7 @@ public class ChatService {
 
         return chatMessageRepository.save(chatMessage);
     }
+
     public void deleteChat(Long id) {
         chatMessageRepository.deleteById(id);
     }
