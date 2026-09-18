@@ -36,6 +36,10 @@ public class ChatController {
 
         return chatService.updateChat(id, request.getMessage());
     }
+    @DeleteMapping("/chat/{id}")
+    public void deleteChat(@PathVariable Long id) {
+        chatService.deleteChat(id);
+    }
 
 }
 

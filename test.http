@@ -17,3 +17,6 @@ Content-Type: application/json
 {
   "message": "How are you?"
 }
+###
+
+DELETE http://localhost:8080/chat/4
