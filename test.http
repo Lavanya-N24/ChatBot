@@ -17,15 +17,16 @@ Content-Type: application/json
 
 {
   "message": "How are you?"
+}
 
+###
+PUT http://localhost:8080/chat/999
 Content-Type: application/json
 
-  {
-    "message": "Testing"
-  }
+{
+  "message": "Testing"
 }
 ###
-
 DELETE http://localhost:8080/chat/4
 
 
