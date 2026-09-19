@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleValidationException(
+    public ResponseEntity<ErrorResponse> handleValidationException(
             MethodArgumentNotValidException exception) {
+
+        ErrorResponse errorResponse =
+                new ErrorResponse(400, "Message cannot be empty");
 
         return ResponseEntity
                 .badRequest()
-                .body("Message cannot be empty");
+                .body(errorResponse);
     }
 }
