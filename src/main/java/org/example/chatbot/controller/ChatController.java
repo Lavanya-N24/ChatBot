@@ -2,6 +2,7 @@ package org.example.chatbot.controller;
 import org.example.chatbot.entity.ChatMessage;
 import java.util.List;
 import org.example.chatbot.service.ChatService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +18,7 @@ public class ChatController {
         return "Hello, chatbot!";
     }
     @PostMapping("/chat")
-    public ChatResponse chat(@RequestBody ChatRequest request) {
+    public ChatResponse chat(@Valid @RequestBody ChatRequest request) {
         String response= chatService.generateResponse(request.getMessage());
         return new ChatResponse(response);
     }
