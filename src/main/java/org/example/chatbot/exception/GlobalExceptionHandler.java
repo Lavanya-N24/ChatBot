@@ -9,8 +9,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleValidationException(
             MethodArgumentNotValidException exception) {
 
+        String message = exception.getBindingResult()
+                .getFieldError()
+                .getDefaultMessage();
+
         ErrorResponse errorResponse =
-                new ErrorResponse(400, "Message cannot be empty");
+                new ErrorResponse(400, message);
 
         return ResponseEntity
                 .badRequest()

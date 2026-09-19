@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class ChatRequest {
 
-    @NotBlank
+    @NotBlank(message = "Message cannot be empty")
     private String message;
 
     public String getMessage() {
