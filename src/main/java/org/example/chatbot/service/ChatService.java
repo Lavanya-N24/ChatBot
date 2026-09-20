@@ -56,6 +56,15 @@ public class ChatService {
     }
 
     public void deleteChat(Long id) {
-        chatMessageRepository.deleteById(id);
+
+        ChatMessage chatMessage = chatMessageRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Chat with ID " + id + " not found"
+                        )
+                );
+
+        chatMessageRepository.delete(chatMessage);
     }
 }

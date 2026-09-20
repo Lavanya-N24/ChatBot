@@ -3,6 +3,7 @@ import org.example.chatbot.entity.ChatMessage;
 import java.util.List;
 import org.example.chatbot.service.ChatService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,9 +19,14 @@ public class ChatController {
         return "Hello, chatbot!";
     }
     @PostMapping("/chat")
-    public ChatResponse chat(@Valid @RequestBody ChatRequest request) {
-        String response= chatService.generateResponse(request.getMessage());
-        return new ChatResponse(response);
+    public ResponseEntity<ChatResponse> chat(
+            @Valid @RequestBody ChatRequest request) {
+
+        String response = chatService.generateResponse(request.getMessage());
+
+        return ResponseEntity.ok(
+                new ChatResponse(response)
+        );
     }
     @GetMapping("/chat/history")
     public List<ChatMessage> getChatHistory() {
@@ -38,8 +44,10 @@ public class ChatController {
         return chatService.updateChat(id, request.getMessage());
     }
     @DeleteMapping("/chat/{id}")
-    public void deleteChat(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteChat(@PathVariable Long id) {
         chatService.deleteChat(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
