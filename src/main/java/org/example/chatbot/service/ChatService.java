@@ -25,10 +25,16 @@ public class ChatService {
         log.info("Chat request received");
 
         String response = "You said: " + message;
-
         ChatMessage chatMessage = new ChatMessage(message, response);
 
-        chatMessageRepository.save(chatMessage);
+        try {
+            chatMessageRepository.save(chatMessage);
+            log.info("Chat saved successfully");
+        } catch (Exception exception) {
+            log.error("Failed to save chat", exception);
+            throw exception;
+        }
+
 
         return response;
     }
@@ -38,13 +44,17 @@ public class ChatService {
     }
 
     public ChatMessage getChatById(Long id) {
+
         return chatMessageRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Chat with ID " + id + " not found"
-                        )
-                );
+                .orElseThrow(() -> {
+
+                    log.warn("Chat with ID {} not found", id);
+
+                    return new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            "Chat with ID " + id + " not found"
+                    );
+                });
     }
 
     public ChatMessage updateChat(Long id, String message) {
