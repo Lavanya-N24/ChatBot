@@ -2,6 +2,8 @@
 services:
   db:
     image: postgres:17
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_DB: chatbot_db
       POSTGRES_USER: ${DB_USERNAME:-postgres}
